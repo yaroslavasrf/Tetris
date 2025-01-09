@@ -1,5 +1,8 @@
 import random
 
+import pygame.key
+
+from timer import Timer
 from data import *
 
 class TetrisGame:
@@ -13,23 +16,28 @@ class TetrisGame:
 
 
 
-    def run(self, change_y, change_x, pressed):
+
+
+
+    def run(self, change_y):
         self.main_surface.blit(self.tetris_game_surface, (INDENT, INDENT))
 
         self.tetris_game_surface.fill(BACKGROUND_COLOR)
         self.field_display()
+        self.pressed()
 
         self.all_sprites.draw(self.tetris_game_surface)
         self.free_fall(change_y)
-        if pressed:
-            self.move_side(change_x)
 
     def free_fall(self, change_y):
         self.shape.free_fall(change_y)
 
-    def move_side(self, change_x):
-        self.shape.move_side(change_x)
-
+    def pressed(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            self.shape.move_side(-1)
+        if keys[pygame.K_RIGHT]:
+            self.shape.move_side(1)
 
     def field_display(self):
         for col in range(COLUMNS):
@@ -58,7 +66,8 @@ class Shape:
 
     def move_side(self, change_x):
         for block in self.blocks:
-            block.update_x(change_x)
+            block.x += change_x
+
 
 
 
@@ -77,7 +86,4 @@ class Block(pygame.sprite.Sprite):
     def update_y(self, change_y):
         self.rect = self.image.get_rect(topleft=(self.x, self.y + change_y * CELL_SIZE))
 
-    def update_x(self, change_x):
-        self.x = self.x + change_x * CELL_SIZE
-        self.rect = self.image.get_rect(topleft=(self.x + change_x * CELL_SIZE, self.y))
 
