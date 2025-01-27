@@ -18,9 +18,16 @@ class Game:
         # Флаг для управления циклом игры
         self.running = True
 
+    def handle_events(self):
+        # Обработка событий игры
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+
 
     def run(self):
         """Запуск игрового цикла."""
 
         while self.running:
+            self.handle_events()  # Обработка событий
             self.clock.tick(60)  # Ограничение FPS (60 кадров в секунду)
