@@ -1,5 +1,8 @@
 import pygame
+import random
 from settings import *
+from tetromino import Tetromino
+
 
 class Game:
     def __init__(self):
@@ -14,6 +17,9 @@ class Game:
 
         # Создание объекта для управления временем
         self.clock = pygame.time.Clock()
+
+        # Выбор случайной фигуры
+        self.falling_tetromino = Tetromino(random.choice(list(SHAPES.keys())))
 
         # Флаг для управления циклом игры
         self.running = True
@@ -32,6 +38,16 @@ class Game:
             for x in range(COLUMNS):
                 rect = pygame.Rect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE)
                 pygame.draw.rect(self.screen, GREY, rect, 1)
+
+    def draw_tetromino(self, tetromino):
+        """Рисует падающую фигуру."""
+
+        # Рисуем каждый блок фигуры
+        for x, y in tetromino.get_positions():
+            if y >= 0:  # Игнорируем блоки, которые за пределами экрана
+                rect = pygame.Rect(x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE)
+                pygame.draw.rect(self.screen, tetromino.color, rect)
+
     def render(self):
         """Отображает всю информацию на экране."""
 
@@ -40,6 +56,7 @@ class Game:
 
         # Рисуем сетку, зафиксированные блоки и текущую падающую фигуру
         self.draw_grid()
+        self.draw_tetromino(self.falling_tetromino)
 
         # Обновление экрана
         pygame.display.flip()
