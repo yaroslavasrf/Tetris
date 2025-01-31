@@ -14,3 +14,13 @@ class Tetromino:
         # Возвращает список позиций блоков фигуры
         return [(self.x + x, self.y + y) for x, y in SHAPES[self.shape][self.rotation]]
 
+    def rotate(self):
+        # Поворот фигуры по часовой стрелке
+        self.rotation = (self.rotation + 1) % len(SHAPES[self.shape])
+
+    def rotate_back(self):
+        # Поворот фигуры против часовой стрелки
+        self.rotation = (self.rotation - 1) % len(SHAPES[self.shape])
+
+
+
