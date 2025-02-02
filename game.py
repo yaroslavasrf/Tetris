@@ -4,6 +4,7 @@ import json
 from level import Level
 from tetromino import Tetromino
 from settings import *
+from start_screen import StartScreen
 
 
 class Game:
@@ -46,6 +47,10 @@ class Game:
 
         # Загрузка сохранённой игры
         self.load_game()
+
+        # Отображаем заголовок игры
+        start_screen = StartScreen(self.screen)
+        start_screen.display()
 
     def save_game(self, score, grid, level, lines_cleared):
         """Сохраняет текущее состояние игры."""
@@ -178,12 +183,12 @@ class Game:
         self.screen.fill(BLACK)
 
         # Отображение текста "Game Over"
-        font = pygame.font.Font(None, 72)
+        font = pygame.font.Font("HowardFatRegular.ttf", 72)
         text = font.render("Game Over!", True, WHITE)
         self.screen.blit(text, (SCREEN_WIDTH // 2 - text.get_width() // 2, SCREEN_HEIGHT // 2 - 50))
 
         # Отображение финального счёта
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font("HowardFatRegular.ttf", 36)
         score_text = font.render(f"Final Score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (SCREEN_WIDTH // 2 - score_text.get_width() // 2, SCREEN_HEIGHT // 2 + 20))
 
