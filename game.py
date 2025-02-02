@@ -4,7 +4,8 @@ import json
 from level import Level
 from tetromino import Tetromino
 from settings import *
-from start_screen import StartScreen
+from start_screen import *
+from end_screen import *
 
 
 class Game:
@@ -47,8 +48,6 @@ class Game:
 
         # Загрузка сохранённой игры
         self.load_game()
-
-        # Отображаем заголовок игры
         start_screen = StartScreen(self.screen)
         start_screen.display()
 
@@ -174,29 +173,34 @@ class Game:
         new_level = self.lines_cleared // 10 + 1
         if new_level > self.player_level:
             self.player_level = new_level
-            self.fall_speed = max(270 - (self.player_level - 1) * 50, 100)  # Ускоряем падение
+            self.fall_speed = max(500 - (self.player_level - 1) * 50, 100)  # Ускоряем падение
 
     def show_game_over_window(self):
+
+        end_screen = EndScreen(self.screen, self.score)
+        if end_screen.display() == "restart":
+            self.__init__()  # Полностью пересоздаём объект игры
+            self.run()
         """Отображает окно окончания игры."""
 
         # Заполнение экрана чёрным цветом
-        self.screen.fill(BLACK)
+        '''self.screen.fill(BLACK)
 
         # Отображение текста "Game Over"
-        font = pygame.font.Font("HowardFatRegular.ttf", 72)
+        font = pygame.font.Font(None, 72)
         text = font.render("Game Over!", True, WHITE)
         self.screen.blit(text, (SCREEN_WIDTH // 2 - text.get_width() // 2, SCREEN_HEIGHT // 2 - 50))
 
         # Отображение финального счёта
-        font = pygame.font.Font("HowardFatRegular.ttf", 36)
+        font = pygame.font.Font(None, 36)
         score_text = font.render(f"Final Score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (SCREEN_WIDTH // 2 - score_text.get_width() // 2, SCREEN_HEIGHT // 2 + 20))
 
         # Обновление экрана
         pygame.display.flip()
 
-        # Задержка на 5 секунд
-        pygame.time.wait(5000)
+        # Задержка на 3 секунды
+        pygame.time.wait(3000)'''
 
     def update_game(self):
         """Обновление игры с учётом текущего времени."""
@@ -249,7 +253,7 @@ class Game:
         self.draw_tetromino(self.falling_tetromino)
 
         # Отображение счёта
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font("HowardFatRegular.ttf", 36)
         score_text = font.render(f"Score: {self.score}", True, WHITE)
         self.screen.blit(score_text, (10, 10))
 
