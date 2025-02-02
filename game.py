@@ -195,8 +195,8 @@ class Game:
         # Обновление экрана
         pygame.display.flip()
 
-        # Задержка на 3 секунды
-        pygame.time.wait(3000)
+        # Задержка на 5 секунд
+        pygame.time.wait(5000)
 
     def update_game(self):
         """Обновление игры с учётом текущего времени."""

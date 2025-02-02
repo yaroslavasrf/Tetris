@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be00c21b-6e5c-4da9-9004-a07af57da927" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/HowardFatRegular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/collide.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/end_screen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/score.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start_screen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collide.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
